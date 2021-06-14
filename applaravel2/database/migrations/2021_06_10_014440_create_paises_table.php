@@ -19,7 +19,7 @@ class CreatePaisesTable extends Migration
             $table->string('capital');
             $table->integer('codigo');
             $table->integer('cantidadhabitantes');
-
+            $table->integer('area');
             $table->timestamps();
 
         });

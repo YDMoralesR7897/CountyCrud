@@ -11,6 +11,7 @@ class Pais extends Model
         'nombre',
         'capital',
         'codigo',
-        'cantidadhabitantes'
+        'cantidadhabitantes',
+        'area'
     ];
 }

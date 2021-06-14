@@ -21,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 route::get('/crud','CrudController@index');
 route::get('/pais','PaisController@index');
+Route::get('/', 'UserController@Index');
+Route::post('users', 'UserController@store')->name('users.store');
+Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');

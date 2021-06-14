@@ -15,12 +15,11 @@ class PaisController extends Controller
     public function index()
     {
         
+        $paises = Pais::latest()->get();
 
-        return response(
-            [
-                'paises' => Pais::get()
-            ]
-        );
+        return view('paises.index',[
+            'paises' => $paises
+        ]);
     }
 
     /**
@@ -41,7 +40,23 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'capital' => ['required', 'unique:paises'],
+            'codigo' => ['required', 'min:4', 'unique:paises'],
+            'cantidadhabitantes' => 'required',
+            'area' => ['required', 'min:1']
+
+        ]);
+        Pais::create([
+            'nombre' => $request->nombre,
+            'capital' => $request->capital,
+            'codigo' => $request->codigo,
+            'cantidadhabitantes'=> $request->cantidadhabitantes,
+            'area' => $request->area
+        ]);
+
+        return back();
     }
 
     /**
@@ -86,6 +101,8 @@ class PaisController extends Controller
      */
     public function destroy(Pais $pais)
     {
-        //
+        $pais->delete();
+
+        return back();
     }
 }
