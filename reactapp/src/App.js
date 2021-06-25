@@ -1,10 +1,10 @@
 import React,{useEffect, useState } from 'react';
-import {
+/*import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
-} from "react-router-dom";
+} from "react-router-dom";*/
 
 const optionFetch = {
   method:'GET',
@@ -27,24 +27,15 @@ function App() {
   },[] )
   
   return (
-    <Router>
-      <Switch>
-        <Route path="/usuario">
+    
     <div>
       <ol>
         {data.map((item)=>(<li key = {item.id}>{item.name }   --   {item.email}</li>))}
       </ol>
     </div>
-    </Route>
-    <Route path ="/paises">
-    <div>
-      <ol>
-        {data.map((item)=>(<li key = {item.id}>{item.nombre }   --   {item.capital}</li>))}
-      </ol>
-    </div>
-    </Route>
-    </Switch>
-    </Router>
+   
+   
+    
   );
 }
 
