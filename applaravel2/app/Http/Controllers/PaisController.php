@@ -17,7 +17,7 @@ class PaisController extends Controller
     {
         
         $paises = Pais::latest()->get();
-        return response([
+        return view('paises.index',[
             'paises' => $paises
         ]);
     }
