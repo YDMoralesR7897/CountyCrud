@@ -20,7 +20,14 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 route::get('/crud','CrudController@index');
-route::get('/pais','PaisController@index');
+// route::get('/pais','PaisController@index');
 Route::get('/', 'UserController@Index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+
+Route::group(['prefix'=>'pais/'],function(){
+    Route::post('/','PaisController@store');
+    Route::get('/','PaisController@index');
+    Route::delete('/{id}','PaisController@destroy');
+    Route::put('/{id}','PaisController@destroy');
+});
