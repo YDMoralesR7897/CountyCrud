@@ -20,7 +20,7 @@ function App() {
     const init = () => {
       fetch('http://127.0.0.1:8000/api/crud',optionFetch)
       .then(Response => Response.json())
-      .then(data => setData(data.users),)
+      .then(data => setData(data.users))
 
     }
     init()
@@ -33,8 +33,6 @@ function App() {
         {data.map((item)=>(<li key = {item.id}>{item.name }   --   {item.email}</li>))}
       </ol>
     </div>
-   
-   
     
   );
 }

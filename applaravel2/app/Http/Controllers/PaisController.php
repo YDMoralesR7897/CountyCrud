@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pais;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PaisController extends Controller
 {
@@ -16,20 +17,17 @@ class PaisController extends Controller
     {
         
         $paises = Pais::latest()->get();
-
-        return view('paises.index',[
+        return response([
             'paises' => $paises
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update()
     {
-        //
+        
+        $paises = Pais::latest()->get();
+        return response([
+            'paises' => $paises
+        ]);
     }
 
     /**
@@ -41,56 +39,26 @@ class PaisController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
+            'nombre' => ['required'],
             'capital' => ['required', 'unique:paises'],
             'codigo' => ['required', 'min:4', 'unique:paises'],
-            'cantidadhabitantes' => 'required',
+            'cantidadhabitantes' => ['required','numeric'],
             'area' => ['required', 'min:1']
 
         ]);
-        Pais::create([
-            'nombre' => $request->nombre,
-            'capital' => $request->capital,
-            'codigo' => $request->codigo,
-            'cantidadhabitantes'=> $request->cantidadhabitantes,
-            'area' => $request->area
-        ]);
-
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pais  $pais
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pais $pais)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pais  $pais
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pais $pais)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pais  $pais
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pais $pais)
-    {
-        //
+        $pais = new Pais;
+        try{
+            $pais->nombre = $request->nombre;
+            $pais->capital =$request->capital;
+            $pais->codigo =$request->codigo;
+            $pais->cantidadhabitantes =$request->cantidadhabitantes;
+            $pais->area =$request->area;
+            $pais->save();
+        }catch(\Exception $e){
+            return response(['mensaje'=>$e->getMessage()], Response::HTTP_OK);
+        }
+        // return back();
+        return response(['mensaje'=>'hola','pais'=>$pais], Response::HTTP_OK);
     }
 
     /**
@@ -99,10 +67,15 @@ class PaisController extends Controller
      * @param  \App\Pais  $pais
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pais $pais)
+    public function destroy(int $id)
     {
-        $pais->delete();
+        $pais = Pais::find($id);
 
-        return back();
+        if(!$pais){
+            return response(['mensaje'=>"no se encontro"], Response::HTTP_NOT_FOUND);
+        }
+
+        $pais->delete();
+        return response(['mensaje'=>"Se elimino"], Response::HTTP_OK);
     }
 }
