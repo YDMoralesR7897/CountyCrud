@@ -29,5 +29,4 @@ Route::group(['prefix'=>'pais/'],function(){
     Route::post('/','PaisController@store');
     Route::get('/','PaisController@index');
     Route::delete('/{id}','PaisController@destroy');
-    Route::put('/{id}','PaisController@destroy');
 });
