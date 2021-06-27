@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pais;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\countrycrudResource;
 
 class PaisController extends Controller
 {
@@ -21,6 +22,12 @@ class PaisController extends Controller
             'paises' => $paises
         ]);
     }
+
+    public function show(Pais $paises)
+    {
+        return new countrycrudResource($paises);
+    }
+
     public function update()
     {
         

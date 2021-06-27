@@ -26,6 +26,6 @@ Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
 
 Route::group(['prefix'=>'pais/'],function(){
     Route::post('/','PaisController@store');
-    Route::get('/','PaisController@index');
+    Route::get('/','PaisController@show');
     Route::delete('/{id}','PaisController@destroy');
 });
