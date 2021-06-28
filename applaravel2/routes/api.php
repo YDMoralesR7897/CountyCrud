@@ -24,8 +24,8 @@ Route::get('/', 'UserController@Index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
 
-Route::group(['prefix'=>'pais/'],function(){
+/*Route::group(['prefix'=>'pais/'],function(){*/
     Route::post('/','PaisController@store');
-    Route::get('/','PaisController@show');
+    Route::get('/{id}','PaisController@show');
     Route::delete('/{id}','PaisController@destroy');
-});
+/*});

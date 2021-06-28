@@ -2,26 +2,26 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Controllers\PaisController;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\providers\Pais;  
+
 
 class countrycrudResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $paises
      * @return array
      */
-    public function toArray($request)
+    public function toArray($paises)
     {
         return [
-            'Nombre' => $this->nombre,
-        'Capital' => $this->capital,
-        'Codigo'=> $this->codigo,
-        'Cantidadhabitantes' => $this->cantidadhabitantes,
-        'Area' => $this->area, 
+            'Nombre' => $paises->nombre,
+            'Capital' => $paises->capital,
+            'Codigo' => $paises->codigo,
+            'Cantidadhabitantes' => $paises->cantidadhabitantes,
+            'Area' => $paises->area
         ];
     }
 };

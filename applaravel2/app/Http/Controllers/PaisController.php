@@ -56,10 +56,10 @@ class PaisController extends Controller
         $pais = new Pais;
         try{
             $pais->nombre = $request->nombre;
-            $pais->capital =$request->capital;
-            $pais->codigo =$request->codigo;
-            $pais->cantidadhabitantes =$request->cantidadhabitantes;
-            $pais->area =$request->area;
+            $pais->capital = $request->capital;
+            $pais->codigo = $request->codigo;
+            $pais->cantidadhabitantes = $request->cantidadhabitantes;
+            $pais->area = $request->area;
             $pais->save();
         }catch(\Exception $e){
             return response(['mensaje'=>$e->getMessage()], Response::HTTP_OK);
